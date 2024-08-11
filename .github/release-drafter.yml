@@ -44,3 +44,4 @@ autolabeler:
   - label: 'enhancement'
     branch:
       - '/(feature)\/.+/'
+include-pre-releases: false
