@@ -1,4 +1,4 @@
-name-template: 'v$RESOLVED_VERSION 🧪'
+name-template: 'v$RESOLVED_VERSION 🏪'
 tag-template: 'v$RESOLVED_VERSION'
 categories:
   - title: '🚀 Features'
@@ -22,7 +22,7 @@ categories:
 exclude-labels:
   - 'skip-changelog'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
-change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
+change-title-escapes: '\<*_&'
 version-resolver:
   major:
     labels:
@@ -37,6 +37,7 @@ version-resolver:
 template: |
   ## Changes
   $CHANGES
+  **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
 autolabeler:
   - label: 'bug'
     branch:
@@ -44,4 +45,3 @@ autolabeler:
   - label: 'enhancement'
     branch:
       - '/(feature)\/.+/'
-include-pre-releases: false
