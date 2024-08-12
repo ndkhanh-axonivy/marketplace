@@ -11,6 +11,10 @@ on:
       version:
         description: 'Release version'
         required: true
+      commitish:
+        description: 'Release target'
+        required: true
+        default: 'master'
       prerelease:
         description: 'Is this a prerelease?'
         required: false
@@ -42,5 +46,6 @@ jobs:
           config-name: release-drafter.yml
           version: ${{ github.event.inputs.version }}
           prerelease: ${{ github.event.inputs.prerelease }}
+          commitish: ${{ github.event.inputs.commitish }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
