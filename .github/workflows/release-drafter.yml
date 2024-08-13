@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IS_PUSH: ${{ github.event_name == 'push' }}
-      COMMITISH: ${{ env.COMMITISH || 'master' }}
+      COMMITISH: 'master'
     steps:
       - name: Checkout code
         if: env.IS_PUSH == 'false'
