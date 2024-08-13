@@ -11,10 +11,6 @@ on:
       version:
         description: 'Release version'
         required: true
-      commitish:
-        description: 'Release target'
-        required: true
-        default: 'master'
       prerelease:
         description: 'Is this a prerelease?'
         required: false
@@ -31,11 +27,20 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get commit SHA for the provided version
+        id: get-sha
+        run: |
+          # Fetch the SHA for the provided version tag
+          SHA=$(git rev-list -n 1 ${{ github.event.inputs.version }})
+          echo "::set-output name=sha::$SHA"
       - uses: release-drafter/release-drafter@v6
         with:
           config-name: release-drafter.yml
           version: ${{ github.event.inputs.version }}
           prerelease: ${{ github.event.inputs.prerelease }}
-          commitish: ${{ github.event.inputs.commitish }}
+          commitish: ${{ steps.get-sha.outputs.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

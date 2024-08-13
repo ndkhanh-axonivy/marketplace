@@ -48,7 +48,3 @@ autolabeler:
   - label: 'enhancement'
     branch:
       - '/(feature)\/.+/'
-
-references:
-  - master
-  - v.+
