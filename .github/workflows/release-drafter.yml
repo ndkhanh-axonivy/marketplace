@@ -42,7 +42,7 @@ jobs:
         run: |
           # Fetch the SHA for the provided version tag
           SHA=$(git rev-list -n 1 ${{ github.event.inputs.version }})
-          echo "SHA=$SHA" >> $GITHUB_ENV
+          echo "COMMITISH=$SHA" >> $GITHUB_ENV
 
       - name: Set commitish for push
         if: env.IS_PUSH == 'true'
