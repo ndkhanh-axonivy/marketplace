@@ -4,7 +4,7 @@ common:
     english: Englisch
     german: Deutsch
   nav:
-    news: News
+    news: News fffff
     doc: Dokumentation
     tutorial: Tutorial
     community: Community
@@ -101,4 +101,4 @@ common:
     noFeedbackMessage1: Es gibt noch keine Rückmeldungen für diesen Anschluss.
     noFeedbackMessage2: Seien Sie der Erste, der seine Meinung mitteilt.
     rateFeedbackBtnLabel: Diesen Stecker bewerten
-    reviewLabelNoYet: Noch keine Bewertungen
+    reviewLabelNoYet: Noch keine Bewertungen ccc
