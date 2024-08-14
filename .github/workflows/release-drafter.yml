@@ -11,10 +11,6 @@ on:
       version:
         description: 'Release version'
         required: true
-      commitish:
-        description: 'Release target'
-        required: true
-        default: 'master'
       prerelease:
         description: 'Is this a prerelease?'
         required: false
@@ -44,8 +40,15 @@ jobs:
         id: get-sha
         if: env.IS_PUSH == 'false'
         run: |
-          # Fetch the SHA for the provided version tag
-          SHA=$(git rev-list -n 1 ${{ github.event.inputs.version }})
+          # Attempt to fetch the SHA for the provided version tag
+          SHA=$(git rev-list -n 1 ${{ github.event.inputs.version }} || echo "")
+          
+          # If SHA is empty, fallback to master branch
+          if [ -z "$SHA" ]; then
+            echo "Could not find SHA for the provided version. Falling back to master."
+            SHA="master"
+          fi
+
           echo "COMMITISH=$SHA" >> $GITHUB_ENV
 
       - name: Set commitish for push
