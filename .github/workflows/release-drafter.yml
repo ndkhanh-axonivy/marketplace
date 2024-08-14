@@ -11,6 +11,10 @@ on:
       version:
         description: 'Release version'
         required: true
+      commitish:
+        description: 'Release target'
+        required: true
+        default: 'master'
       prerelease:
         description: 'Is this a prerelease?'
         required: false
