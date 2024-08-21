@@ -6,11 +6,11 @@ common:
     german: Deutsch
   nav:
     news: News
-    doc: Doc 123
-    tutorial: Tutorial
-    community: Community  123 fix bug
-    team: Team  
-    market: Market  hello bbb
+    doc: Doc
+    tutorial: Tutorial new version
+    community: Community
+    team: Team
+    market: Market
   introduction:
     about: The Axon Ivy market offers a unique experience to accelerate process automation.
     contribute:
