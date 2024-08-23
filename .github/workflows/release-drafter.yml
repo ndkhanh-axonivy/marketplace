@@ -6,60 +6,11 @@ on:
       - master
   pull_request:
     types: [opened, reopened, synchronize]
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Release version'
-        required: true
-      prerelease:
-        description: 'Is this a prerelease?'
-        required: false
-        default: 'false'
-        type: boolean
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 jobs:
-  update_release_draft:
-    permissions:
-      contents: write
-      pull-requests: write
-    runs-on: ubuntu-latest
-    env:
-      IS_PUSH: ${{ github.event_name == 'push' }}
-      COMMITISH: 'master'
-    steps:
-      - name: Checkout code
-        if: env.IS_PUSH == 'false'
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Get commit SHA for the provided version
-        id: get-sha
-        if: env.IS_PUSH == 'false'
-        run: |
-          # Attempt to fetch the SHA for the provided version tag
-          SHA=$(git rev-list -n 1 ${{ github.event.inputs.version }} || echo "")
-          
-          # If SHA is empty, fallback to master branch
-          if [ -z "$SHA" ]; then
-            echo "Could not find SHA for the provided version. Falling back to master."
-            SHA="master"
-          fi
-
-          echo "COMMITISH=$SHA" >> $GITHUB_ENV
-
-      - name: Set commitish for push
-        if: env.IS_PUSH == 'true'
-        run: echo "COMMITISH=master" >> $GITHUB_ENV
-
-      - uses: release-drafter/release-drafter@v6
-        with:
-          config-name: release-drafter.yml
-          version: ${{ github.event.inputs.version }}
-          prerelease: ${{ github.event.inputs.prerelease }}
-          commitish: ${{ env.COMMITISH }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  build:
+    uses: axonivy-market/github-workflows/.github/workflows/release-drafter.yml@v4
